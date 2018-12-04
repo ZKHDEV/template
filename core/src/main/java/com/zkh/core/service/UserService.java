@@ -1,6 +1,6 @@
 package com.zkh.core.service;
 
-import com.zkh.core.bean.User;
+import com.zkh.core.model.User;
 import com.zkh.core.dao.UserDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

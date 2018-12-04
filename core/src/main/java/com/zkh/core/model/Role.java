@@ -1,4 +1,4 @@
-package com.zkh.core.bean;
+package com.zkh.core.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

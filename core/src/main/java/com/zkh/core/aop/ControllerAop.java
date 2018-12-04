@@ -1,14 +1,11 @@
 package com.zkh.core.aop;
 
-import com.zkh.core.bean.ResultBean;
-import com.zkh.core.exception.UnloginException;
+import com.zkh.core.model.ResultBean;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ControllerAop {
     
-    @Pointcut("execution(public com.zkh.core.bean.ResultBean *(..))")
+    @Pointcut("execution(public com.zkh.core.model.ResultBean *(..))")
     private void controllerMethod() {
     }
     
@@ -42,9 +39,9 @@ public class ControllerAop {
         ResultBean<?> result = new ResultBean(e);
 
         // 已知异常
-        if (e instanceof UnloginException) {
-            result.setMsg(e.getLocalizedMessage());
-        }
+//        if (e instanceof UnloginException) {
+//            result.setMsg(e.getLocalizedMessage());
+//        }
 
         log.error(pjp.getSignature() + " error ", e);
         return result;
