@@ -1,5 +1,6 @@
 package com.zkh.core.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zkh.core.dao.UserDao;
 import com.zkh.core.model.Role;
 import com.zkh.core.model.User;
@@ -17,7 +18,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -42,10 +48,41 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         };
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService()).passwordEncoder(new BCryptPasswordEncoder());
+    @Bean
+    public UsernamePasswordAuthenticationFilter authenticationFilter() {
+        return new UsernamePasswordAuthenticationFilter() {
+            @Override
+            protected String obtainPassword(HttpServletRequest request) {
+                String password = null;
+                try(InputStream in = request.getInputStream()) {
+                    User user = new ObjectMapper().readValue(in,User.class);
+                    if (user != null) {
+                        password = user.getPassword();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return password;
+            }
+
+            @Override
+            protected String obtainUsername(HttpServletRequest request) {
+                String username = null;
+                try(InputStream in = request.getInputStream()) {
+                    User user = new ObjectMapper().readValue(in,User.class);
+                    if (user != null) {
+                        username = user.getUsername();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return username;
+            }
+        };
     }
+
+    @Bean
+    public SavedRequestAwareAuthenticationSuccessHandler
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -55,11 +92,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
+                .
                 .failureUrl("/login?error")
                 .and()
                 .logout().permitAll();
-        super.configure(http);
+        http.csrf().disable();
+        //设置自定义用户名密码校验过滤器
+        http.addFilterAt(authenticationFilter(),UsernamePasswordAuthenticationFilter.class);
     }
+
+
 }

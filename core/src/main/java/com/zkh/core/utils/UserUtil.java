@@ -18,7 +18,6 @@ public class UserUtil {
 
     public static boolean isAdmin() {
         List<Role> roles = getUser().getRoles();
-
         for (Role role : roles) {
             if (Roles.ADMIN .equals(role.getName())) {
                 return true;
