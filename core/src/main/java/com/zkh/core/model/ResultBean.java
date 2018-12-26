@@ -21,6 +21,11 @@ public class ResultBean<T> {
         this.code = SUCCESS;
     }
 
+    public ResultBean(int code,String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
     public ResultBean(Throwable e) {
         super();
         this.msg = e.toString();

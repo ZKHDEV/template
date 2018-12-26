@@ -17,7 +17,7 @@ public class JpaConfig {
         return new AuditorAware<User>() {
             @Override
             public Optional<User> getCurrentAuditor() {
-                return Optional.of(UserUtil.getUserIfLogin());
+                return Optional.of(UserUtil.getUser());
             }
         };
     }
