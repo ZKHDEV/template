@@ -2,7 +2,7 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:h2:file:~/testdb.h2
+    url: jdbc:h2:file:~/testdb3.h2
     username: root
     password: toor
     driverClassName: org.h2.Driver

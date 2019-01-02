@@ -1,8 +1,10 @@
 package com.zkh.core.config;
 
+import com.zkh.core.security.AjaxUsernamePasswordAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,6 +16,9 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
@@ -35,12 +40,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private LogoutSuccessHandler logoutSuccessHandler;
 
-    @Autowired
-    private UsernamePasswordAuthenticationFilter usernamePasswordAuthenticationFilter;
+//    @Autowired
+//    private UsernamePasswordAuthenticationFilter usernamePasswordAuthenticationFilter;
 
     @Autowired
     @Qualifier("customUserDetailsService")
     private UserDetailsService userDetailsService;
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -52,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .and()
                 .formLogin()
+                .loginPage("/login")
                 .successHandler(authenticationSuccessHandler)
                 .failureHandler(authenticationFailureHandler)
                 .permitAll()
@@ -63,7 +74,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
 
         //设置自定义用户名密码校验过滤器
-        http.addFilterAt(usernamePasswordAuthenticationFilter,UsernamePasswordAuthenticationFilter.class);
+//        UsernamePasswordAuthenticationFilter usernamePasswordAuthenticationFilter = new AjaxUsernamePasswordAuthenticationFilter();
+//        usernamePasswordAuthenticationFilter.setAuthenticationManager(authenticationManager());
+//        http.addFilter(usernamePasswordAuthenticationFilter);
     }
 
 

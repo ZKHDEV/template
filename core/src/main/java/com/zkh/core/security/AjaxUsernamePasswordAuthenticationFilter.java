@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 
-@Component
 public class AjaxUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected String obtainPassword(HttpServletRequest request) {
