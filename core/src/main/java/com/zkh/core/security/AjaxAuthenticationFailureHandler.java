@@ -15,7 +15,6 @@ import java.io.IOException;
 public class AjaxAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        ResultBean<?> result = new ResultBean<>(ResultBean.FAIL,"登录失败");
-        httpServletResponse.getWriter().write(new ObjectMapper().writeValueAsString(result));
+        httpServletResponse.getWriter().write(new ResultBean<>(ResultBean.FAIL,"Login failed").toJsonString());
     }
 }

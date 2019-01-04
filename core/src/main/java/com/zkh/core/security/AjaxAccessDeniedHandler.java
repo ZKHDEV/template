@@ -1,6 +1,5 @@
 package com.zkh.core.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zkh.core.model.ResultBean;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -15,7 +14,6 @@ import java.io.IOException;
 public class AjaxAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
-        ResultBean<?> result = new ResultBean<>(ResultBean.NO_PERMISSION,"未授权");
-        httpServletResponse.getWriter().write(new ObjectMapper().writeValueAsString(result));
+        httpServletResponse.getWriter().write(new ResultBean<>(ResultBean.NO_PERMISSION,"Unauthorized").toJsonString());
     }
 }

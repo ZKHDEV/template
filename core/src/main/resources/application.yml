@@ -2,7 +2,7 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:h2:file:~/testdb3.h2
+    url: jdbc:h2:file:~/testdb4.h2
     username: root
     password: toor
     driverClassName: org.h2.Driver
@@ -34,7 +34,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
   h2:
     console:
       enabled: true

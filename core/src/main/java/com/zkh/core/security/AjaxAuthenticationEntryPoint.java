@@ -15,7 +15,6 @@ import java.io.IOException;
 public class AjaxAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        ResultBean<?> result = new ResultBean<>(ResultBean.NO_LOGIN,"未登录");
-        httpServletResponse.getWriter().write(new ObjectMapper().writeValueAsString(result));
+        httpServletResponse.getWriter().write(new ResultBean<>(ResultBean.NO_LOGIN,"Not logged in").toJsonString());
     }
 }

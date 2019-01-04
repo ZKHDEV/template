@@ -15,7 +15,6 @@ import java.io.IOException;
 public class AjaxLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-        ResultBean<?> result = new ResultBean<>(ResultBean.SUCCESS,"注销成功");
-        httpServletResponse.getWriter().write(new ObjectMapper().writeValueAsString(result));
+        httpServletResponse.getWriter().write(new ResultBean<>(ResultBean.SUCCESS,"Logout successfully").toJsonString());
     }
 }

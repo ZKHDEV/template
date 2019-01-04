@@ -9,6 +9,7 @@ import com.zkh.core.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -65,7 +66,8 @@ public class CreateTestData implements CommandLineRunner {
         admin.setNick("测试用户");
 
         // 密码
-        admin.setPassword("123456");
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        admin.setPassword(encoder.encode("123456"));
 
         // 角色
         List<Role> roleList = new ArrayList<>();

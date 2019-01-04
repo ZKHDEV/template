@@ -15,7 +15,6 @@ import java.io.IOException;
 public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-        ResultBean<?> result = new ResultBean<>(ResultBean.SUCCESS,"登录成功");
-        httpServletResponse.getWriter().write(new ObjectMapper().writeValueAsString(result));
+        httpServletResponse.getWriter().write(new ResultBean<>(ResultBean.SUCCESS,"Login successfully").toJsonString());
     }
 }

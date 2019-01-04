@@ -1,11 +1,16 @@
 package com.zkh.core.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zkh.core.exception.IOException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
-public class ResultBean<T> {
+public class ResultBean<T> implements Serializable {
     public static int SUCCESS = 0;
     public static int FAIL = -1;
     public static int NO_LOGIN = -2;
@@ -30,5 +35,13 @@ public class ResultBean<T> {
         super();
         this.msg = e.toString();
         this.code = FAIL;
+    }
+
+    public String toJsonString() {
+        try {
+            return new ObjectMapper().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            throw new IOException(e);
+        }
     }
 }
