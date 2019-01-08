@@ -2,7 +2,6 @@ package com.zkh.core.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zkh.core.exception.IOException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -41,7 +40,7 @@ public class ResultBean<T> implements Serializable {
         try {
             return new ObjectMapper().writeValueAsString(this);
         } catch (JsonProcessingException e) {
-            throw new IOException(e);
+            throw new RuntimeException(e);
         }
     }
 }
