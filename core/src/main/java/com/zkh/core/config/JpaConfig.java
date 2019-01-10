@@ -9,9 +9,16 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.util.Optional;
 
+/**
+ * JPA配置
+ */
 @Configuration
 @EnableJpaAuditing
 public class JpaConfig {
+    /**
+     * @CreateBy 配置
+     * @return
+     */
     @Bean
     public AuditorAware<User> auditorAware() {
         return new AuditorAware<User>() {

@@ -1,6 +1,5 @@
 package com.zkh.core.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zkh.core.model.ResultBean;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -11,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 登录失败处理
+ */
 @Component
 public class AjaxAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override

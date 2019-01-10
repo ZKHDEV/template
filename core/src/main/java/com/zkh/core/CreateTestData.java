@@ -5,7 +5,6 @@ import com.zkh.core.dao.RoleDao;
 import com.zkh.core.dao.UserDao;
 import com.zkh.core.model.Role;
 import com.zkh.core.model.User;
-import com.zkh.core.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -15,6 +14,9 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 初始化测试数据
+ */
 @Component
 @Slf4j
 public class CreateTestData implements CommandLineRunner {
@@ -31,16 +33,13 @@ public class CreateTestData implements CommandLineRunner {
         if (userDao.findByUsername("test") == null) {
             log.info("创建测试数据.....");
 
-            createUsers();
-
-            // FIXME
-            // createConfigs();
+            createUsersPrimary();
 
             log.info("创建测试数据完毕");
         }
     }
 
-    public void createUsers() {
+    public void createUsersPrimary() {
         log.info("---addUser---");
 
         // role

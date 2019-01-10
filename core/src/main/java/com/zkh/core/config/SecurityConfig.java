@@ -20,6 +20,9 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 系统安全配置
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)

@@ -1,5 +1,6 @@
 package com.zkh.core.model;
 
+import com.zkh.core.model.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

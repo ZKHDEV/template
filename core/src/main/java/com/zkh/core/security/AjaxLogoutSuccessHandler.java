@@ -1,6 +1,5 @@
 package com.zkh.core.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zkh.core.model.ResultBean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
@@ -11,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 注销成功处理
+ */
 @Component
 public class AjaxLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override

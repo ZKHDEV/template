@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 访问无权限处理
+ */
 @Component
 public class AjaxAccessDeniedHandler implements AccessDeniedHandler {
     @Override

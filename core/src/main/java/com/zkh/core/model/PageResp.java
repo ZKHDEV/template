@@ -5,6 +5,10 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
+/**
+ * 分页响应结果类
+ * @param <T>
+ */
 @Data
 public class PageResp<T> {
     private List<T> rows;

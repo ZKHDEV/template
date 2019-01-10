@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,6 +21,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Table(indexes = { @Index(name = "user_name_unique", columnList = "username", unique = true) })
 public class User extends BaseEntity implements UserDetails, Serializable {
+    @NotEmpty(message = "{test}")
     private String username;
     private String nick;
     @JsonIgnore
@@ -31,6 +33,7 @@ public class User extends BaseEntity implements UserDetails, Serializable {
             inverseJoinColumns={@JoinColumn(name="role_id",referencedColumnName="id")})
     private List<Role> roles;
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
@@ -40,21 +43,25 @@ public class User extends BaseEntity implements UserDetails, Serializable {
         return authorities;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
         return true;

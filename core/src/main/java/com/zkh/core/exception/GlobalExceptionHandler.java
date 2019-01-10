@@ -5,20 +5,25 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 全局异常处理
+ */
 @ControllerAdvice(annotations = {RestController.class, Controller.class})
 @ResponseBody
 @Slf4j
 public class GlobalExceptionHandler {
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+
+    }
 
     @ExceptionHandler(Exception.class)
     public ResultBean<?> handleMethodArgumentNotValidException(Exception e) {
@@ -27,6 +32,7 @@ public class GlobalExceptionHandler {
         result.setCode(ResultBean.FAIL);
 
         if(e instanceof BindException) {
+            //请求参数校验异常
             List<FieldError> errors = ((BindException)e).getBindingResult().getFieldErrors();
             Map<String,String> msgs = new HashMap<>();
             for(FieldError error : errors) {
@@ -39,6 +45,7 @@ public class GlobalExceptionHandler {
             log.error(msgs.toString());
 
         } else {
+            //其它异常
             result.setMsg(e.getMessage());
             log.error(e.getMessage());
         }
