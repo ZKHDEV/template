@@ -6,6 +6,7 @@ import com.zkh.core.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,14 +22,12 @@ public class TestController {
     @Autowired
     private MessageSource messageSource;
 
-    @PostMapping("/test")
-    public ResultBean test(@Valid Test test) {
+    @GetMapping("/test")
+    public ResultBean test() {
         User user = new User();
-        user.setUsername("1111111111111111");
-        List<User> users = new ArrayList<>();
-        users.add(user);
-        test.setUsers(users);
-        return new ResultBean<>(test);
+        user.setUsername("abc1");
+        user.setNick("abc2");
+        return new ResultBean<>(user);
     }
 
     @PostMapping("/user")
