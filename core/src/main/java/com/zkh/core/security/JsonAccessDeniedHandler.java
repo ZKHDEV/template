@@ -14,7 +14,7 @@ import java.io.IOException;
  * 访问无权限处理
  */
 @Component
-public class AjaxAccessDeniedHandler implements AccessDeniedHandler {
+public class JsonAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
         httpServletResponse.getWriter().write(new ResultBean<>(ResultBean.NO_PERMISSION,"Unauthorized").toJsonString());

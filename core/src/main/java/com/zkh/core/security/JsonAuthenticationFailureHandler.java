@@ -14,7 +14,7 @@ import java.io.IOException;
  * 登录失败处理
  */
 @Component
-public class AjaxAuthenticationFailureHandler implements AuthenticationFailureHandler {
+public class JsonAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         httpServletResponse.getWriter().write(new ResultBean<>(ResultBean.FAIL,"Login failed").toJsonString());

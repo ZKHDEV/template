@@ -14,7 +14,7 @@ import java.io.IOException;
  * 登录成功处理
  */
 @Component
-public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class JsonAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         httpServletResponse.getWriter().write(new ResultBean<>(ResultBean.SUCCESS,"Login successfully").toJsonString());

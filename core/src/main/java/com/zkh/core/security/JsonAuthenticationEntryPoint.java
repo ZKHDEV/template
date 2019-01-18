@@ -14,7 +14,7 @@ import java.io.IOException;
  * 未登录处理
  */
 @Component
-public class AjaxAuthenticationEntryPoint implements AuthenticationEntryPoint {
+public class JsonAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         httpServletResponse.getWriter().write(new ResultBean<>(ResultBean.NO_LOGIN,"Not logged in").toJsonString());

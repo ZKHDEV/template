@@ -14,7 +14,7 @@ import java.io.IOException;
  * 注销成功处理
  */
 @Component
-public class AjaxLogoutSuccessHandler implements LogoutSuccessHandler {
+public class JsonLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         httpServletResponse.getWriter().write(new ResultBean<>(ResultBean.SUCCESS,"Logout successfully").toJsonString());
