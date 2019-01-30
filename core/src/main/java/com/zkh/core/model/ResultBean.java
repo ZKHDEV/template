@@ -42,6 +42,12 @@ public class ResultBean<T> implements Serializable {
     }
 
     public String toJsonString() {
-        return StringUtil.toJsonString(this);
+        String str = null;
+        try {
+            str = StringUtil.toJsonString(this);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return str;
     }
 }

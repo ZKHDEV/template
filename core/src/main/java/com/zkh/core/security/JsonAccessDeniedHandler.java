@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 访问无权限处理
+ * 无权访问处理
  */
 @Component
 public class JsonAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
-        httpServletResponse.getWriter().write(new ResultBean<>(ResultBean.NO_PERMISSION,"Unauthorized").toJsonString());
+        httpServletResponse.setContentType("application/json;charset=utf-8");
+        httpServletResponse.setCharacterEncoding("UTF-8");
+        httpServletResponse.getWriter().println(new ResultBean<>(ResultBean.NO_PERMISSION,"无权访问").toJsonString());
     }
 }

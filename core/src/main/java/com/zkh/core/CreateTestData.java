@@ -83,7 +83,7 @@ public class CreateTestData implements CommandLineRunner {
             user.setNick("测试用户" + i);
 
             // 密码
-            user.setPassword("123456");
+            user.setPassword(encoder.encode("123456"));
 
             List<Role> roleList2 = new ArrayList<>();
             roleList.add(normaleRole);

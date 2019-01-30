@@ -3,6 +3,8 @@ package com.zkh.core.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
+
 /**
  * 字符串工具类
  */
@@ -21,13 +23,22 @@ public class StringUtil {
      * @param obj
      * @param <T>
      * @return
+     * @throws JsonProcessingException
      */
-    public static  <T> String toJsonString(T obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+    public static  <T> String toJsonString(T obj) throws JsonProcessingException {
+        return new ObjectMapper().writeValueAsString(obj);
+    }
+
+    /**
+     * JSON字符串转化为对象
+     * @param json
+     * @param clazz
+     * @param <T>
+     * @return
+     * @throws IOException
+     */
+    public static <T> T fromJsonString(String json,Class<T> clazz) throws IOException {
+        return (T)new ObjectMapper().readValue(json, clazz);
     }
 
 

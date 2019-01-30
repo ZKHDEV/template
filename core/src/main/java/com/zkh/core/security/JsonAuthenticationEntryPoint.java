@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 未登录处理
+ * 认证失败处理
  */
 @Component
 public class JsonAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        httpServletResponse.getWriter().write(new ResultBean<>(ResultBean.NO_LOGIN,"Not logged in").toJsonString());
+        httpServletResponse.setContentType("application/json;charset=utf-8");
+        httpServletResponse.setCharacterEncoding("UTF-8");
+        httpServletResponse.getWriter().println(new ResultBean<>(ResultBean.NO_LOGIN,"认证失败").toJsonString());
     }
 }

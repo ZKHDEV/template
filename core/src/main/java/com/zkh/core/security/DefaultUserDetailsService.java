@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /**
- * 自定义用户信息获取业务
+ * 用户信息获取
  */
 @Service("defaultUserDetailsService")
 @Slf4j
