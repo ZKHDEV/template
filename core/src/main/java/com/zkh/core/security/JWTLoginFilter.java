@@ -2,7 +2,6 @@ package com.zkh.core.security;
 
 import com.zkh.core.model.ResultBean;
 import com.zkh.core.model.User;
-import com.zkh.core.service.JwtAuthenticationService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -26,7 +25,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        JwtAuthenticationService.setAuthentication(response, (User) authResult.getPrincipal());
+        JWTAuthenticationService.setJwt(response, (User) authResult.getPrincipal());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.zkh.core.security;
 
-import com.zkh.core.service.JwtAuthenticationService;
+import com.zkh.core.model.User;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -17,9 +18,9 @@ import java.io.IOException;
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        Authentication auth = JwtAuthenticationService.getAuthentication(httpServletRequest);
-        if(auth != null) {
-            SecurityContextHolder.getContext().setAuthentication(auth);
+        User user = JWTAuthenticationService.getUser(httpServletRequest);
+        if(user != null) {
+            SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities()));
         }
 
         filterChain.doFilter(httpServletRequest,httpServletResponse);
